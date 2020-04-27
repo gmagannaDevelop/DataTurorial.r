@@ -1,0 +1,32 @@
+---
+title: "Introduction to R"
+author: "Gustavo Magaña López"
+date: "4/26/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+[R](https://www.r-project.org/) is a free software environment for statistical computing and graphics. It compiles and runs on a wide variety of UNIX platforms, Windows and MacOS. 
+
+
+## Used packages
+When working with R, we can define our own functions and create modules called packages which serve a specific purpose. These can be submitted to [CRAN](https://cran.r-project.org/)(The Comprehensive R Archive Network). Publishing a package enables people to use the code you have developed!
+In this case we are using the following packages:
+```{r imports, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(lubridate)
+library(reshape2)
+```
+
+## Reproducibility
+In order for you to reproduce the results found in this notebooks, we must set a seed for the random number generator. This is a topic beyond the scope of this repo, but I highly advise you to read about [pseudorandom number generators](https://en.wikipedia.org/wiki/Pseudorandom_number_generator).
+```{r seed, message=FALSE, warning=FALSE}
+  set.seed(204) # so you can reproduce the results
+```
+
+
+
+

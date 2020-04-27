@@ -1,0 +1,107 @@
+---
+title: "Linear Regression"
+author: "Gustavo Magaña López"
+date: "4/26/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Used packages
+When working with R, we can define our own functions and create modules called packages which serve a specific purpose. These can be submitted to [CRAN](https://cran.r-project.org/)(The Comprehensive R Archive Network). Publishing a package enables people to use the code you have developed!
+In this case we are using the following packages:
+```{r imports, message=FALSE, warning=FALSE}
+library(ggplot2)
+```
+
+# The regression problem
+Imagine that we have a couple of variables which we know to be correlated. There is a variable we control $x$ and the second one $y$ is partially determined by it.
+There is obviously some noise, some thing that we cannot control in the
+measurement process or maybe the phenomenon is stochastic in nature.
+
+## Assumptions underlying Simple Linear Regression
+1. Values of the independent variable X are said to be fixed.
+2. The variable X is measured without error.
+3. For each value of X there is a subpopulation of Y values. For the usual inferential procedures of estimation and hypothesis testing to be valid, these subpopulations must be normally distributed. 
+4. The variances of the subpopulations of Y are all equal and denoted by s2.
+5. The means of the subpopulations of Y all lie on the same straight line.This is known as the assumption of linearity.
+
+![Assumption of linearity](../imgs/simple_reg.png)
+
+
+![Variations](../imgs/reg_explained.png)
+
+```{r data import}
+full.data <- read.csv("../data/sensor_data.csv")
+latest <- read.csv("../data/latest2.csv")
+```
+
+
+To see the oldest and latest dates of the full dataset, we take :
+```{r full.dates}
+full.data$DateTime[1]
+full.data$DateTime[length(full.data$DateTime)]
+```
+
+Here we only have the latest values
+```{r last.dates}
+latest$DateTime[1]
+latest$DateTime[length(latest$DateTime)]
+```
+
+
+
+# Full dataset
+
+### Scatterplot
+Here we see all of the data.
+```{r scatterplot}
+full.data.scatter <- ggplot(data = full.data, aes(x=ISIG, y=Glucose)) +
+  geom_point(shape=1) +
+  geom_hline(yintercept=mean(full.data$Glucose), linetype="dashed", color = "blue")
+print(full.data.scatter)
+```
+
+
+### Regression
+```{r fullregression}
+full.data.regression <- lm(Glucose ~ ISIG, data = full.data)
+
+summary(full.data.regression)
+
+full.data.plot <- ggplot(data = full.data, aes(x=ISIG, y=Glucose)) +
+  geom_point(shape=1) +
+  geom_smooth(method=lm)   # Add linear regression line 
+
+print(full.data.plot)
+```
+
+
+# Latest observations
+
+### Scatterplot
+```{r latest.scatterplot}
+latest.scatter <- ggplot(data = latest, aes(x=ISIG, y=Glucose)) +
+  geom_point(shape=1) +
+  geom_hline(yintercept=mean(latest$Glucose), linetype="dashed", color = "blue")
+print(latest.scatter)
+```
+
+
+### Regression
+```{r latest.regression}
+latest.regression <- lm(Glucose ~ ISIG, data = latest)
+
+summary(latest.regression)
+
+latest.plot <- ggplot(data = latest, aes(x=ISIG, y=Glucose)) +
+  geom_point(shape=1) +
+  geom_smooth(method=lm)   # Add linear regression line 
+
+print(latest.plot)
+```
+
+
+
