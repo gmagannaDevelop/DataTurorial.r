@@ -31,3 +31,6 @@ All documents are writen in [R Markdown](https://rmarkdown.rstudio.com/) markup 
 
 7. Matching and regression discontinuity estimation
 
+
+Additional ressources:
+[My report](build/biostat.pdf)
