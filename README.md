@@ -15,7 +15,7 @@ All documents are writen in [R Markdown](https://rmarkdown.rstudio.com/) markup 
 
 2. Bivariate statistical tests
  
-3. [Linear regression](build/)
+3. [Linear regression](build/linear-regression.html)
     * Basics
     * Model diagnostics
     * Interaction effects
